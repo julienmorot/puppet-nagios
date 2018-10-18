@@ -22,7 +22,7 @@ I've only tested this module with Ubuntu LTS.
 
 ## Setup
 
-### Setup Requirements **OPTIONAL**
+### Setup Requirements
 
 PuppetDB.
 
@@ -34,14 +34,20 @@ PuppetDB.
 For a server :
 ```
 node 'nagios' {
-    include nagios::server
+    class { nagios::server:
+		adminuser => 'nagiosadmin',
+		adminpwd  => 'secret',
+	}
 }
 ```
 
 For a client :
 ```
 node 'agent' {
-    class { nagios::agent: nagservers => [ 'nagios.int.morot.fr '] }
+    class { nagios::agent:
+        nagservers => [ '192.168.100.10 ']
+    }
+	include nagios::export::linux
 }
 ```
 

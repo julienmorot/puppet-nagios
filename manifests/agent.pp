@@ -21,7 +21,17 @@ class nagios::agent (
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
-        source  => "puppet:///modules/${module_name}/nrpe_local.cfg",
+        source  => "puppet:///modules/${module_name}/agent/nrpe_local.cfg",
+        require => Package[$nrpepkg_name],
+        notify  => Service[$service_name],
+    }
+
+    File { '/etc/default/nagios-nrpe-server':
+        ensure  => file,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        source  => "puppet:///modules/${module_name}/agent/nagios-nrpe-server",
         require => Package[$nrpepkg_name],
         notify  => Service[$service_name],
     }
@@ -33,7 +43,7 @@ class nagios::agent (
         owner   => 'root',
         group   => 'root',
         require => Package['nagios-plugins'],
-        source  => "puppet:///modules/${module_name}/check_cpu"
+        source  => "puppet:///modules/${module_name}/checks/check_cpu"
     }
     File { 'check_mem':
         path    => '/usr/lib/nagios/plugins/check_mem',
@@ -42,7 +52,7 @@ class nagios::agent (
         owner   => 'root',
         group   => 'root',
         require => Package['nagios-plugins'],
-        source  => "puppet:///modules/${module_name}/check_mem"
+        source  => "puppet:///modules/${module_name}/checks/check_mem"
     }
 
     Service { $service_name:
