@@ -1,10 +1,10 @@
 class nagios::agent (
-	$nagservers = []
+    $nagservers = []
 ) {
-	
-	$nrpepkg_name = 'nagios-nrpe-server'
-	$service_name = 'nagios-nrpe-server'
-	ensure_packages(['nagios-plugins',$nrpepkg_name], {'ensure' => 'present'})
+    
+    $nrpepkg_name = 'nagios-nrpe-server'
+    $service_name = 'nagios-nrpe-server'
+    ensure_packages(['nagios-plugins',$nrpepkg_name], {'ensure' => 'present'})
 
     File { '/etc/nagios/nrpe.cfg':
         ensure  => file,

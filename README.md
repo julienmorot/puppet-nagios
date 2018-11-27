@@ -31,6 +31,9 @@ PuppetDB.
 
 ## Usage
 
+You must customize files and check under the files directory to fit your needs.
+
+
 For a server :
 ```
 node 'nagios' {
