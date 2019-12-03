@@ -14,7 +14,7 @@
     },
     {
       "name": "puppetlabs-nagios_core",
-      "version_requirement": ">= 1.0.3"                                         |
+      "version_requirement": ">= 1.0.3"
     }
   ],
   "data_provider": null
